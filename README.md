@@ -29,6 +29,19 @@ A Manager for your bills directly in your browser.
 <br>
 <br>
 
+
+# DEVELOPMENT: 
+
+- [ ] - Creating Boilerplate in React.
+- [ ] - Adding Redux.
+- [ ] - Adding Tests Library.
+- [ ] - Adding Storybook.
+- [ ] - Adding Styled Components.
+- [ ] - Config chrome extensions.
+
+<br>
+<br>
+
 # _TESTS:_ 
 
 -Coverage 0%-
