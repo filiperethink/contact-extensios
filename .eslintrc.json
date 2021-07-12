@@ -1,0 +1,55 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint", "react-hooks"],
+	"extends": [
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"rules": {
+		"react/jsx-no-literals": [
+			0,
+			{
+				"noStrings": true,
+				"allowedStrings": ["allowed"]
+			}
+		],
+		"@typescript-eslint/explicit-module-boundary-types": ["off"],
+		"semi": [2, "always"],
+		"quotes": [2, "single"],
+		"jsx-quotes": [1, "prefer-single"],
+		"arrow-parens": ["error", "as-needed"],
+		"comma-dangle": ["error", "only-multiline"],
+		"react/destructuring-assignment": [0],
+		"prefer-destructuring": [0],
+		"linebreak-style": ["off"],
+		"no-underscore-dangle": ["off"],
+		"no-access-state-in-setstate": ["off"],
+		"react/require-default-props": ["off"],
+		"react/jsx-filename-extension": [
+			"error",
+			{
+				"extensions": [".js", ".jsx", ".ts", ".tsx"]
+			}
+		],
+		"no-param-reassign": "off",
+		"import/no-cycle": "off",
+		"global-require": "off",
+		"eqeqeq": "error",
+		"no-shadow": "error",
+		"no-unused-expressions": "off",
+		"no-console": "error",
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
+		"react/prop-types": "off"
+	},
+	"settings": {
+		"react": {
+			"pragma": "React",
+			"version": "detect"
+		}
+	}
+}
