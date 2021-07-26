@@ -62,7 +62,7 @@ describe('Input', () => {
 		) as HTMLFormElement;
 
 		expect(inputWithouPlaceholder.placeholder).toEqual(
-			'Digite aqui sua próxima tarefa.'
+			'Digite um numero de celular aqui:'
 		);
 	});
 	it('should render a placeholder default when isnt passed', () => {

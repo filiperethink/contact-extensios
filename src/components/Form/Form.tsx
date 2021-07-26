@@ -2,30 +2,34 @@ import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import * as S from './styled';
 import { Button, Input } from '../';
+import { formatPhoneNumber } from '../../utils/format';
 
 export type FormPropsType = {
-	handleFormSubmit: (text: string) => string;
+	handleFormSubmit: (phone: string) => void;
 };
 
 function Form({ handleFormSubmit }: FormPropsType) {
-	const [text, setText] = useState('');
+	const [phoneNumber, setText] = useState('');
 	const [hasErros, setHasErrors] = useState(false);
 	const [InputIsTouched, setInputIsTouched] = useState(false);
 
-	const handleTextChange = (string: React.SetStateAction<string>) => {
-		setText(string);
+	const handleTextChange = (phone: React.SetStateAction<string>) => {
+		setText(phone);
 		setInputIsTouched(true);
-		if (text.length >= 4) {
+		if (phoneNumber.length !== 11) {
 			setHasErrors(false);
 		}
 	};
 
 	const onSubmitForm = () => {
-		if (text.length >= 5 && text.length <= 20) {
+		const result = formatPhoneNumber(phoneNumber);
+		if (!result.error) {
 			setHasErrors(false);
-			return handleFormSubmit(text);
+			handleFormSubmit(result?.phone);
+			const linkPath = `https://api.whatsapp.com/send?phone=${result?.phone}&text=\"Olá Yandra, gostaria de falar a respeito daquele assunto:\"`;
+			window.open(linkPath, '_blank');
 		} else {
-			const errorMessage = 'Campo é obrigatório (Min 5, Max 20 caracteres).';
+			const errorMessage = 'Campo é obrigatório e deve conter 12 caracteres.';
 			setHasErrors(true);
 			handleFormSubmit(errorMessage);
 			setInputIsTouched(false);
@@ -35,7 +39,7 @@ function Form({ handleFormSubmit }: FormPropsType) {
 	return (
 		<>
 			<S.FormContainer>
-				<Input onChange={handleTextChange} value={text} />
+				<Input onChange={handleTextChange} value={phoneNumber} />
 				<Button
 					onClick={onSubmitForm}
 					fontSize={0.7}

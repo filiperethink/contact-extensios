@@ -8,14 +8,14 @@ export type InputProps = {
 };
 export default function Input({
 	onChange,
-	value = '',
-	placeholder = 'Digite aqui sua próxima tarefa.',
+	value,
+	placeholder = 'Digite um numero de celular aqui:',
 }: InputProps) {
 	return (
 		<S.InputWrapper role='label' htmlFor='input' data-testid='input-wrapper'>
 			<S.Input
-				maxLength={20}
-				min={3}
+				maxLength={11}
+				min={11}
 				placeholder={placeholder}
 				onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 					onChange(event.target.value)

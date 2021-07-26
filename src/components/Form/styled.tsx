@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import styled from 'styled-components';
 import { METRICS, COLORS, S } from '../../theme';
 

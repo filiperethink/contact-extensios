@@ -5,8 +5,8 @@ import Form, { FormPropsType } from './Form';
 
 describe('Form', () => {
 	const defaultProps: FormPropsType = {
-		handleFormSubmit: jest.fn().mockImplementation((text: string) => {
-			return text;
+		handleFormSubmit: jest.fn().mockImplementation((phone: string) => {
+			return phone;
 		}),
 	};
 	it('should render without error', () => {
@@ -23,13 +23,13 @@ describe('Form', () => {
 		screen.getByRole('label');
 	});
 
-	it('should handleFormSubmit props been called when user insert a text and press the button', () => {
+	it('should handleFormSubmit props been called when user insert a phone and press the button', () => {
 		render(<Form {...defaultProps} />);
 		const button = screen.getByRole('button');
 		const input = screen.getByRole('textbox') as HTMLInputElement;
-		userEvent.type(input, 'Tarefa 2');
+		userEvent.type(input, '31997815503');
 		userEvent.click(button);
-		expect(defaultProps.handleFormSubmit).toHaveBeenCalledWith('Tarefa 2');
+		expect(defaultProps.handleFormSubmit).toHaveBeenCalledWith('5531997815503');
 		expect(defaultProps.handleFormSubmit).toHaveBeenCalledTimes(1);
 	});
 	it('should handleFormSubmit have to return a error when value is empty', () => {
@@ -40,27 +40,18 @@ describe('Form', () => {
 		userEvent.click(button);
 		expect(defaultProps.handleFormSubmit).toHaveBeenCalled();
 		expect(defaultProps.handleFormSubmit).toHaveBeenCalledWith(
-			'Campo é obrigatório (Min 5, Max 20 caracteres).'
+			'Campo é obrigatório e deve conter 12 caracteres.'
 		);
 	});
 
-	it('should render a ErrorText when isEmpty value submited', () => {
+	it('should render a ErrorText when invalid value submited', () => {
 		render(<Form {...defaultProps} />);
 		const button = screen.getByRole('button');
 		const input = screen.getByRole('textbox') as HTMLInputElement;
-		userEvent.type(input, ' ');
+		userEvent.type(input, '031');
 		userEvent.click(button);
-		expect(
-			screen.getByText('Campo é obrigatório (Min 5, Max 20 caracteres).')
-		).toBeInTheDocument();
-	});
-
-	it('should not render a ErrorText when value is filled', () => {
-		render(<Form {...defaultProps} />);
-		const button = screen.getByRole('button');
-		const input = screen.getByRole('textbox') as HTMLInputElement;
-		userEvent.type(input, ' ');
-		userEvent.click(button);
-		expect(screen.getByTestId('error-label')).toBeInTheDocument();
+		expect(defaultProps.handleFormSubmit).toHaveBeenCalledWith(
+			'Campo é obrigatório e deve conter 12 caracteres.'
+		);
 	});
 });
